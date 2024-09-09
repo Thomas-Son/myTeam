@@ -1,16 +1,21 @@
 import {
     Button,
-    Input,
+    Label,
     H2,
     YStack,
 } from '@my/ui';
-import { Form } from 'tamagui';
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { mutate } from "swr";
 
 interface FormData {
     name: string;
+    post: string;
+    height: number;
+    weight: number;
+    number: number;
+    age: number;
+    nationality: string;
+    state: string;
 }
 
 interface Error {
@@ -20,10 +25,9 @@ interface Error {
 type Props = {
     formId: string;
     playerForm: FormData;
-    forNewPlayer?: boolean;
 };
 
-function AddPlayer({ formId, playerForm, forNewPlayer = true }: Props) {
+function AddPlayer({ formId, playerForm }: Props) {
 
     const router = useRouter();
     const contentType = "application/json";
@@ -31,38 +35,20 @@ function AddPlayer({ formId, playerForm, forNewPlayer = true }: Props) {
     const [message, setMessage] = useState("");
 
     const [form, setForm] = useState({
-        name: playerForm.name
+        name: playerForm.name,
+        post: playerForm.post,
+        height: playerForm.height,
+        weight: playerForm.weight,
+        number: playerForm.number,
+        age: playerForm.age,
+        nationality: playerForm.nationality,
+        state: playerForm.state
     });
 
-    const putData = async (form: FormData) => {
-        const { id } = router.query;
-
-        try {
-            const res = await fetch(`/api/players/${id}`, {
-                method: "PUT",
-                headers: {
-                    Accept: contentType,
-                    "Content-Type": contentType,
-                },
-                body: JSON.stringify(form),
-            });
-
-            // Throw error with status code in case Fetch API req failed
-            if (!res.ok) {
-                throw new Error(res.status.toString());
-            }
-
-            const { data } = await res.json();
-
-            mutate(`/api/players/${id}`, data, false); // Update the local data without a revalidation
-            router.push("/team-demo");
-        } catch (error) {
-            setMessage("Failed to update player");
-        }
-    };
 
     const postData = async (form: FormData) => {
         try {
+            console.log("fail")
             const res = await fetch("/api/players", {
                 method: "POST",
                 headers: {
@@ -71,7 +57,7 @@ function AddPlayer({ formId, playerForm, forNewPlayer = true }: Props) {
                 },
                 body: JSON.stringify(form),
             });
-            console.log("fail")
+
             console.log(res)
 
             if (!res.ok) {
@@ -88,10 +74,7 @@ function AddPlayer({ formId, playerForm, forNewPlayer = true }: Props) {
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
         const target = e.target;
-        const value =
-            target.name === "poddy_trained"
-                ? (target as HTMLInputElement).checked
-                : target.value;
+        const value = target.value;
         const name = target.name;
 
         setForm({
@@ -111,7 +94,7 @@ function AddPlayer({ formId, playerForm, forNewPlayer = true }: Props) {
         const errs = formValidate();
 
         if (Object.keys(errs).length === 0) {
-            forNewPlayer ? postData(form) : putData(form);
+            postData(form)
         } else {
             setErrors({ errs });
         }
@@ -120,7 +103,9 @@ function AddPlayer({ formId, playerForm, forNewPlayer = true }: Props) {
     return (
         <YStack f={1} jc="center" ai="center" gap="$8" p="$4" bg="$background">
             <H2>Ajouter un joueur à l'équipe</H2>
-            <form onSubmit={handleSubmit}>
+
+            <form onSubmit={handleSubmit} >
+                <Label htmlFor="name">Nom</Label>
                 <input
                     placeholder="Nom du joueur"
                     type="text"
@@ -130,9 +115,72 @@ function AddPlayer({ formId, playerForm, forNewPlayer = true }: Props) {
                     required
                 />
 
-                <button type="submit" className="btn">
+                <Label htmlFor="post">Poste</Label>
+                <input
+                    placeholder="Post du joueur"
+                    type="text"
+                    name="post"
+                    value={form.post}
+                    onChange={handleChange}
+                />
+
+                <Label htmlFor="height">Taille</Label>
+                <input
+                    placeholder="Taille du joueur"
+                    type="number"
+                    name="height"
+                    value={form.height}
+                    onChange={handleChange}
+                />
+
+                <Label htmlFor="weight">Poids</Label>
+                <input
+                    placeholder="Poids du joueur"
+                    type="number"
+                    name="weight"
+                    value={form.weight}
+                    onChange={handleChange}
+                />
+
+                <Label htmlFor="number">Numéro</Label>
+                <input
+                    placeholder="Numéro du joueur"
+                    type="number"
+                    name="number"
+                    value={form.number}
+                    onChange={handleChange}
+                />
+
+                <Label htmlFor="age">Age</Label>
+                <input
+                    placeholder="Age du joueur"
+                    type="number"
+                    name="age"
+                    value={form.age}
+                    onChange={handleChange}
+                />
+
+                <Label htmlFor="nationality">Nationalité</Label>
+                <input
+                    placeholder="Nationalité du joueur"
+                    type="text"
+                    name="nationality"
+                    value={form.nationality}
+                    onChange={handleChange}
+                />
+
+                <Label htmlFor="state">Etat</Label>
+                <input
+                    placeholder="Etat du joueur"
+                    type="text"
+                    name="state"
+                    value={form.state}
+                    onChange={handleChange}
+                />
+
+                <Button type="submit" className="btn">
                     Ajouter
-                </button>
+                </Button>
             </form>
 
             <p>{message}</p>
