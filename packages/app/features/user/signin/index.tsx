@@ -1,5 +1,5 @@
 import {
-    Anchor,
+    Label,
     Button,
     Input,
     H2,
@@ -18,6 +18,7 @@ import { useRouter } from "next/router";
 
 interface FormData {
     alias: string;
+    team: string;
     pwd: string;
 }
 
@@ -26,132 +27,102 @@ interface Error {
     pwd?: string;
 }
 
-// type Props = {
-//     formId: string;
-//     petForm: FormData;
-//     forNewPet?: boolean;
-// };
+type Props = {
+    formId: string;
+    userForm: FormData;
+};
 
-function Signin() {
-    // const router = useRouter();
-    // const contentType = "application/json";
-    // const [errors, setErrors] = useState({});
-    // const [message, setMessage] = useState("");
+function Signin({ formId, userForm }: Props) {
+    const router = useRouter();
+    const contentType = "application/json";
+    const [errors, setErrors] = useState({});
+    const [message, setMessage] = useState("");
 
-    // const [form, setForm] = useState({
-    //     alias: FormData.alias,
-    //     pwd: FormData.pwd,
-    // });
+    const [form, setForm] = useState({
+        alias: userForm.alias,
+        team: userForm.team,
+        pwd: userForm.pwd,
+    });
 
-    // /* The PUT method edits an existing entry in the mongodb database. */
-    // const putData = async (form: FormData) => {
-    //     const { id } = router.query;
+    const postData = async (form: FormData) => {
+        try {
+            const res = await fetch("/api/users/" + formId, {
+                method: "GET",
+                headers: {
+                    Accept: contentType,
+                    "Content-Type": contentType,
+                },
+                body: JSON.stringify(form),
+            });
 
-    //     try {
-    //         const res = await fetch(`/api/pets/${id}`, {
-    //             method: "PUT",
-    //             headers: {
-    //                 Accept: contentType,
-    //                 "Content-Type": contentType,
-    //             },
-    //             body: JSON.stringify(form),
-    //         });
+            if (!res.ok) {
+                throw new Error(res.status.toString());
+            }
 
-    //         // Throw error with status code in case Fetch API req failed
-    //         if (!res.ok) {
-    //             throw new Error(res.status.toString());
-    //         }
+        } catch (error) {
+            setMessage("Failed to find user");
+        }
+    };
 
-    //         const { data } = await res.json();
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => {
+        const target = e.target;
+        const value = target.value;
+        const name = target.name;
 
-    //         mutate(`/api/pets/${id}`, data, false); // Update the local data without a revalidation
-    //         router.push("/");
-    //     } catch (error) {
-    //         setMessage("Failed to update pet");
-    //     }
-    // };
+        setForm({
+            ...form,
+            [name]: value,
+        });
+    };
 
-    // /* The POST method adds a new entry in the mongodb database. */
-    // const postData = async (form: FormData) => {
-    //     try {
-    //         const res = await fetch("/api/pets", {
-    //             method: "POST",
-    //             headers: {
-    //                 Accept: contentType,
-    //                 "Content-Type": contentType,
-    //             },
-    //             body: JSON.stringify(form),
-    //         });
+    const formValidate = () => {
+        let err: Error = {};
+        if (!form.alias) err.alias = "Name is required";
+        if (!form.pwd) err.pwd = "Pwd is required";
+        return err;
+    };
 
-    //         // Throw error with status code in case Fetch API req failed
-    //         if (!res.ok) {
-    //             throw new Error(res.status.toString());
-    //         }
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const errs = formValidate();
 
-    //         router.push("/");
-    //     } catch (error) {
-    //         setMessage("Failed to add pet");
-    //     }
-    // };
-
-    // const handleChange = (
-    //     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    // ) => {
-    //     const target = e.target;
-    //     const value =
-    //         target.name === "poddy_trained"
-    //             ? (target as HTMLInputElement).checked
-    //             : target.value;
-    //     const name = target.name;
-
-    //     setForm({
-    //         ...form,
-    //         [name]: value,
-    //     });
-    // };
-
-    // /* Makes sure pet info is filled for pet name, owner name, species, and image url*/
-    // const formValidate = () => {
-    //     let err: Error = {};
-    //     if (!form.name) err.name = "Name is required";
-    //     if (!form.owner_name) err.owner_name = "Owner is required";
-    //     if (!form.species) err.species = "Species is required";
-    //     if (!form.image_url) err.image_url = "Image URL is required";
-    //     return err;
-    // };
-
-    // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault();
-    //     const errs = formValidate();
-
-    //     if (Object.keys(errs).length === 0) {
-    //         forNewPet ? postData(form) : putData(form);
-    //     } else {
-    //         setErrors({ errs });
-    //     }
-    // };
+        if (Object.keys(errs).length === 0) {
+            postData(form);
+        } else {
+            setErrors({ errs });
+        }
+    };
 
     return (
         <YStack f={1} jc="center" ai="center" gap="$8" p="$4" bg="$background">
             <H2>Connexion</H2>
-            <Form gap="$2">
-                <Input
+            <form onSubmit={handleSubmit} >
+                <Label htmlFor="alias">Nom d'utilisateur</Label>
+                <input
                     placeholder="Nom d'utilisateur"
                     type="text"
                     name="alias"
+                    value={form.alias}
+                    onChange={handleChange}
+                    required
                 />
 
-                <Input
+                <Label htmlFor="pwd">Mot de passe</Label>
+                <input
                     placeholder="Mot de passe"
                     type="password"
-                    secureTextEntry
                     name="pwd"
+                    value={form.pwd}
+                    onChange={handleChange}
+                    required
                 />
 
                 <Button type="submit" className="btn">
-                    Se Connecter
+                    Se connecter
                 </Button>
-            </Form>
+            </form>
         </YStack>
     );
 };

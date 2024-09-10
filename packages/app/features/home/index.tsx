@@ -31,8 +31,8 @@ export function Home({ pagesMode = false }: { pagesMode?: boolean }) {
         <Separator />
       </YStack>
 
-      {/* <Button {...linkProps}>Se connecter</Button>
-      <Button {...linkProps2}>S'inscrire</Button> */}
+      <Button {...linkProps}>Se connecter</Button>
+      <Button {...linkProps2}>S'inscrire</Button>
       <Button {...linkProps3}>Equipe démo</Button>
     </YStack>
   )
