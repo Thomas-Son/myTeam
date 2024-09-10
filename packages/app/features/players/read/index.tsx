@@ -1,84 +1,50 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import dbConnect from "app/lib/dbConnect";
-import Player, { Players } from "app/models/Player";
-import { GetServerSideProps, GetServerSidePropsContext } from "next";
-import { ParsedUrlQuery } from "querystring";
 
-interface Params extends ParsedUrlQuery {
-    id: string;
-}
+import Link from "next/link";
+import Player, { Players } from "app/models/Player";
+import {
+    Button,
+    H3,
+    H4,
+    YStack,
+    Section
+} from '@my/ui';
+import { Card, Paragraph } from 'tamagui'
 
 type Props = {
     player: Players;
 };
 
 const PlayerPage = ({ player }: Props) => {
-    const router = useRouter();
-    const [message, setMessage] = useState("");
-    const handleDelete = async () => {
-        const layerID = router.query.id;
-
-        try {
-            await fetch(`/api/players/${layerID}`, {
-                method: "Delete",
-            });
-            router.push("/");
-        } catch (error) {
-            setMessage("Failed to delete the player.");
-        }
-    };
-
     return (
-        <div>
-            <div className="card">
-                <h5>{player.name}</h5>
-                <div className="main-content">
-                    <p>{player.name}</p>
+        <YStack f={1} ai="center" p="$4" bg="$background">
+            <Section gap="$4" p="$5" alignItems="center">
+                <H3>Informations :</H3>
 
-                    <div className="btn-container">
-                        <Link href={`/${player._id}/edit`}>
-                            <button className="btn edit">Edit</button>
+                <Card alignItems="center" p="$2" gap="$2" backgroundColor="$grey4" width={270} height={320}>
+                    <H4>{player.name}</H4>
+                    <YStack>
+                        <Paragraph>Nom : {player.name}</Paragraph>
+                        <Paragraph>Numéro : {player.number}</Paragraph>
+                        <Paragraph>Poste : {player.post}</Paragraph>
+                        <Paragraph>Taille : {player.height} cm</Paragraph>
+                        <Paragraph>Poids : {player.weight} kg</Paragraph>
+                        <Paragraph>Age : {player.age} ans</Paragraph>
+                        <Paragraph>Nationalité : {player.nationality}</Paragraph>
+                        <Paragraph>Etat : {player.state}</Paragraph>
+                    </YStack>
+
+                    <Card.Footer orientation="horizontal" gap="$2">
+                        <Link href={"/team-demo/" + player._id + "/modifier"}>
+                            <Button borderRadius="$4" size="$4" backgroundColor="$grey5">Modifier</Button>
                         </Link>
-                        <button className="btn delete" onClick={handleDelete}>
-                            Delete
-                        </button>
-                    </div>
-                </div>
-            </div>
-            {message && <p>{message}</p>}
-        </div>
+                        <Link href={"/team-demo/" + player._id + "/supprimer"}>
+                            <Button borderRadius="$4" size="$4" backgroundColor="$grey5">Supprimer</Button>
+                        </Link>
+                    </Card.Footer>
+                </Card>
+            </Section>
+        </YStack>
     );
-};
-
-export const getServerSideProps: GetServerSideProps<Props, Params> = async ({
-    params,
-}: GetServerSidePropsContext) => {
-    await dbConnect();
-
-    if (!params?.id) {
-        return {
-            notFound: true,
-        };
-    }
-
-    const player = await Player.findById(params.id).lean();
-
-    if (!player) {
-        return {
-            notFound: true,
-        };
-    }
-
-    /* Ensures all objectIds and nested objectIds are serialized as JSON data */
-    const serializedPlayer = JSON.parse(JSON.stringify(player));
-
-    return {
-        props: {
-            player: serializedPlayer,
-        },
-    };
 };
 
 export default PlayerPage;

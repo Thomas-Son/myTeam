@@ -13,7 +13,7 @@ export default async function handler(
   switch (method) {
     case "GET":
       try {
-        const players = await Player.find({}); /* find all the data in our database */
+        const players = await Player.find({});
         res.status(200).json({ success: true, data: players });
       } catch (error) {
         res.status(400).json({ success: false });
@@ -23,7 +23,7 @@ export default async function handler(
       try {
         const player = await Player.create(
           req.body,
-        ); /* create a new model in the database */
+        );
         res.status(201).json({ success: true, data: player });
       } catch (error) {
         res.status(400).json({ success: false });

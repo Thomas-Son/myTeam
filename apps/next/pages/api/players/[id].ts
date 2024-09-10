@@ -14,7 +14,7 @@ export default async function handler(
   await dbConnect();
 
   switch (method) {
-    case "GET" /* Get a model by its ID */:
+    case "GET" :
       try {
         const player = await Player.findById(id);
         if (!player) {
@@ -26,7 +26,7 @@ export default async function handler(
       }
       break;
 
-    case "PUT" /* Edit a model by its ID */:
+    case "PUT" :
       try {
         const player = await Player.findByIdAndUpdate(id, req.body, {
           new: true,
@@ -41,7 +41,7 @@ export default async function handler(
       }
       break;
 
-    case "DELETE" /* Delete a model by its ID */:
+    case "DELETE" :
       try {
         const deletedPlayer = await Player.deleteOne({ _id: id });
         if (!deletedPlayer) {
