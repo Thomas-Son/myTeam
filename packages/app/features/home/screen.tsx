@@ -6,17 +6,9 @@ import {
   YStack,
 } from '@my/ui'
 import { useLink } from 'solito/navigation'
+import { TextLink } from 'solito/link';
 
-export function Home({ pagesMode = false }: { pagesMode?: boolean }) {
-  const linkProps = useLink({
-    href: `utilisateur/connexion`,
-  });
-  const linkProps2 = useLink({
-    href: `utilisateur/inscription`,
-  });
-  const linkProps3 = useLink({
-    href: `team-demo`,
-  });
+export function HomeScreen({ pagesMode = false }: { pagesMode?: boolean }) {
 
   return (
     <YStack f={1} jc="center" ai="center" gap="$8" p="$4" bg="$background">
@@ -31,9 +23,9 @@ export function Home({ pagesMode = false }: { pagesMode?: boolean }) {
         <Separator />
       </YStack>
 
-      <Button {...linkProps}>Se connecter</Button>
-      <Button {...linkProps2}>S'inscrire</Button>
-      <Button {...linkProps3}>Equipe démo</Button>
+      <Button><TextLink href="/connexion">Se Connecter</TextLink></Button>
+      <Button><TextLink href="/inscription">S'inscrire</TextLink></Button>
+      <Button><TextLink href="/team-demo">Equipe démo</TextLink></Button>
     </YStack>
   )
 }

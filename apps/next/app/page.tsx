@@ -1,5 +1,5 @@
 'use client'
 
-import { Home } from 'app/features/home/index';
+import { HomeScreen } from 'app/features/home/screen';
 
-export default Home;
+export default HomeScreen;

@@ -1,194 +1,174 @@
 import {
     Button,
     Label,
+    Form,
+    Input,
     H2,
     YStack,
 } from '@my/ui';
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-interface FormData {
-    name: string;
-    post: string;
-    height: number;
-    weight: number;
-    number: number;
-    age: number;
-    nationality: string;
-    state: string;
-}
+// interface FormData {
+//     name: string;
+//     post: string;
+//     height: number;
+//     weight: number;
+//     number: number;
+//     age: number;
+//     nationality: string;
+//     state: string;
+// }
 
-interface Error {
-    name?: string;
-}
+// interface Error {
+//     name?: string;
+// }
 
-type Props = {
-    formId: string;
-    playerForm: FormData;
-};
+// type Props = {
+//     formId: string;
+//     playerForm: FormData;
+// };
 
-function AddPlayer({ formId, playerForm }: Props) {
+function AddPlayer() {
 
-    const router = useRouter();
-    const contentType = "application/json";
-    const [errors, setErrors] = useState({});
-    const [message, setMessage] = useState("");
+    // const router = useRouter();
+    // const contentType = "application/json";
+    // const [errors, setErrors] = useState({});
+    // const [message, setMessage] = useState("");
+    // const [alias, setAlias] = useState("");
 
-    const [form, setForm] = useState({
-        name: playerForm.name,
-        post: playerForm.post,
-        height: playerForm.height,
-        weight: playerForm.weight,
-        number: playerForm.number,
-        age: playerForm.age,
-        nationality: playerForm.nationality,
-        state: playerForm.state
-    });
+    // const [form, setForm] = useState({
+    //     name: playerForm.name,
+    //     post: playerForm.post,
+    //     height: playerForm.height,
+    //     weight: playerForm.weight,
+    //     number: playerForm.number,
+    //     age: playerForm.age,
+    //     nationality: playerForm.nationality,
+    //     state: playerForm.state
+    // });
 
 
-    const postData = async (form: FormData) => {
-        try {
-            console.log("fail")
-            const res = await fetch("/api/players", {
-                method: "POST",
-                headers: {
-                    Accept: contentType,
-                    "Content-Type": contentType,
-                },
-                body: JSON.stringify(form),
-            });
+    // const postData = async (form: FormData) => {
+    //     try {
+    //         const res = await fetch("/api/players", {
+    //             method: "POST",
+    //             headers: {
+    //                 Accept: contentType,
+    //                 "Content-Type": contentType,
+    //             },
+    //             body: JSON.stringify(form),
+    //         });
 
-            console.log(res)
+    //         console.log(res)
 
-            if (!res.ok) {
-                throw new Error(res.status.toString());
-            }
+    //         if (!res.ok) {
+    //             throw new Error(res.status.toString());
+    //         }
 
-            router.push("/team-demo");
-        } catch (error) {
-            setMessage("Failed to add player");
-        }
-    };
+    //         router.push("/team-demo");
+    //     } catch (error) {
+    //         setMessage("Failed to add player");
+    //     }
+    // };
 
-    const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    ) => {
-        const target = e.target;
-        const value = target.value;
-        const name = target.name;
+    // const handleChange = (
+    //     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    // ) => {
+    //     const target = e.target;
+    //     const value = target.value;
+    //     const name = target.name;
 
-        setForm({
-            ...form,
-            [name]: value,
-        });
-    };
+    //     setForm({
+    //         ...form,
+    //         [name]: value,
+    //     });
+    // };
 
-    const formValidate = () => {
-        let err: Error = {};
-        if (!form.name) err.name = "Entrer le nom du joueur";
-        return err;
-    };
+    // const formValidate = () => {
+    //     let err: Error = {};
+    //     if (!form.name) err.name = "Entrer le nom du joueur";
+    //     return err;
+    // };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const errs = formValidate();
+    // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault();
+    //     const errs = formValidate();
 
-        if (Object.keys(errs).length === 0) {
-            postData(form)
-        } else {
-            setErrors({ errs });
-        }
-    };
+    //     if (Object.keys(errs).length === 0) {
+    //         postData(form)
+    //     } else {
+    //         setErrors({ errs });
+    //     }
+    // };
 
     return (
         <YStack f={1} jc="center" ai="center" gap="$8" p="$4" bg="$background">
             <H2>Ajouter un joueur à l'équipe</H2>
 
-            <form onSubmit={handleSubmit} >
-                <Label htmlFor="name">Nom</Label>
-                <input
+            <Form gap="$3" >
+                <Label>Nom</Label>
+                <Input
                     placeholder="Nom du joueur"
                     type="text"
                     name="name"
-                    value={form.name}
-                    onChange={handleChange}
                     required
                 />
-
+{/* 
                 <Label htmlFor="post">Poste</Label>
-                <input
+                <Input
                     placeholder="Post du joueur"
                     type="text"
                     name="post"
-                    value={form.post}
-                    onChange={handleChange}
                 />
 
                 <Label htmlFor="height">Taille</Label>
-                <input
+                <Input
                     placeholder="Taille du joueur"
                     type="number"
                     name="height"
-                    value={form.height}
-                    onChange={handleChange}
                 />
 
                 <Label htmlFor="weight">Poids</Label>
-                <input
+                <Input
                     placeholder="Poids du joueur"
                     type="number"
                     name="weight"
-                    value={form.weight}
-                    onChange={handleChange}
                 />
 
                 <Label htmlFor="number">Numéro</Label>
-                <input
+                <Input
                     placeholder="Numéro du joueur"
                     type="number"
                     name="number"
-                    value={form.number}
-                    onChange={handleChange}
                 />
 
                 <Label htmlFor="age">Age</Label>
-                <input
+                <Input
                     placeholder="Age du joueur"
                     type="number"
                     name="age"
-                    value={form.age}
-                    onChange={handleChange}
                 />
 
                 <Label htmlFor="nationality">Nationalité</Label>
-                <input
+                <Input
                     placeholder="Nationalité du joueur"
                     type="text"
                     name="nationality"
-                    value={form.nationality}
-                    onChange={handleChange}
                 />
 
                 <Label htmlFor="state">Etat</Label>
-                <input
+                <Input
                     placeholder="Etat du joueur"
                     type="text"
                     name="state"
-                    value={form.state}
-                    onChange={handleChange}
-                />
+                /> */}
 
                 <Button type="submit" className="btn">
                     Ajouter
                 </Button>
-            </form>
+            </Form>
 
-            <p>{message}</p>
-            <div>
-                {Object.keys(errors).map((err, index) => (
-                    <li key={index}>{err}</li>
-                ))}
-            </div>
         </YStack>
     );
 };

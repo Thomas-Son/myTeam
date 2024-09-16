@@ -1,12 +1,11 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import { Home } from '../../features/home/index'
+import { HomeScreen } from '../../features/home/screen'
+import TeamDemo from "../../features/team-demo/index"
 
 const Stack = createNativeStackNavigator<{
-  home: undefined
-  'user-detail': {
-    id: string
-  }
+  home: undefined,
+  "team-demo": undefined,
 }>()
 
 export function NativeNavigation() {
@@ -14,7 +13,14 @@ export function NativeNavigation() {
     <Stack.Navigator>
       <Stack.Screen
         name="home"
-        component={Home}
+        component={HomeScreen}
+        options={{
+          title: 'Bienvenue',
+        }}
+      />
+      <Stack.Screen
+        name="team-demo"
+        component={TeamDemo}
         options={{
           title: 'Home',
         }}

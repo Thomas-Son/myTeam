@@ -1,16 +1,15 @@
-import { Home } from 'app/features/home/index'
+import { HomeScreen } from 'app/features/home/screen'
 import { Stack } from 'expo-router'
 
 export default function Screen() {
   return (
-    <Stack>
+    <>
       <Stack.Screen
-      name='index'
         options={{
-          title: 'Home',
+          title: 'myTeam',
         }}
       />
-      <Home />
-    </Stack>
+      <HomeScreen />
+    </>
   )
 }
