@@ -1,4 +1,4 @@
-import TeamDemo from '../../next/pages/team-demo'
+import TeamDemo from 'app/features/team-demo/index'
 import { Stack } from 'expo-router'
 
 export default function Screen() {
