@@ -6,7 +6,7 @@ function Chart({title, stat, statMax}) {
 
     return (
         <>
-            <YStack height={60} width="600px" alignItems="center" gap="$4">
+            <YStack height={60} width="600px" alignItems="center" gap="$4" $xs={{ width: "320px" }} >
                 <Paragraph height={30} opacity={0.8}>
                     {title} : {stat} / {statMax}
                 </Paragraph>

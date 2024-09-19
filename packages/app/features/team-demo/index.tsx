@@ -7,7 +7,7 @@ import {
     XStack,
     Avatar,
     Section,
-    Tabs, Separator, SizableText
+    Spinner
 } from '@my/ui';
 import { Card, Paragraph } from 'tamagui'
 import { useEffect, useState } from "react";
@@ -50,7 +50,7 @@ function Team() {
 
                 <XStack flexWrap="wrap" justifyContent="center" maxWidth="900px">
 
-                    {!allPlayers ? (<p>Chargement</p>
+                    {!allPlayers ? (<Spinner size="large" color="$blue10" />
                     ) : (
                         allPlayers.map((player) => (
 

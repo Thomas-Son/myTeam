@@ -1,4 +1,4 @@
-import { YStack, Separator, SizableText, Tabs } from 'tamagui'
+import { YStack, Separator, SizableText, Tabs, useMedia } from 'tamagui'
 import Chart from "./chart";
 
 function TabsList() {

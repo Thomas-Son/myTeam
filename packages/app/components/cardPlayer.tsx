@@ -23,6 +23,7 @@ function CardPlayer({data}) {
             hoverStyle={{ scale: 0.925, borderWidth: "$1", borderColor: "$blue6" }}
             pressStyle={{ scale: 0.875, borderWidth: "$1.5", borderColor: "$blue7" }}
             scale={0.9}
+            $xs={{width: "300px", height: "400px"}}
         >
             <H4>{data.name}</H4>
             <YStack alignItems="center" gap="$3">
