@@ -29,7 +29,7 @@ function DeletePlayer({ player }: Props) {
     };
 
     return (
-        <YStack f={1} jc="center" ai="center" gap="$3" p="$4" bg="$background">
+        <YStack marginTop="$8" ai="center" gap="$5">
             <H3>Voulez-vous supprimer le joueur {player.name} ?</H3>
             <Button borderRadius="$4" size="$3" backgroundColor="$grey5" onClick={handleDelete}>Supprimer</Button>
             <Link href={".."}>

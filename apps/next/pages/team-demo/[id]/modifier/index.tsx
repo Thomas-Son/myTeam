@@ -20,18 +20,7 @@ const EditPlayer = () => {
   if (isLoading) return <p>Loading...</p>;
   if (!player) return null;
 
-  const playerForm = {
-    name: player.name,
-    post: player.post,
-    height: player.height,
-    weight: player.weight,
-    number: player.number,
-    age: player.age,
-    nationality: player.nationality,
-    state: player.state
-  };
-
-  return <UpdatePlayer formId="edit-player-form" playerForm={playerForm} />;
+  return <UpdatePlayer />;
 };
 
 export default EditPlayer;

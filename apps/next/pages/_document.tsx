@@ -9,6 +9,7 @@ import NextDocument, {
   NextScript,
 } from 'next/document';
 import { config } from '@my/ui';
+import Header from "app/features/header/index"
 
 export default class Document extends NextDocument {
   static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
@@ -49,6 +50,7 @@ export default class Document extends NextDocument {
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         </Head>
         <body>
+          <Header />
           <Main />
           <NextScript />
         </body>

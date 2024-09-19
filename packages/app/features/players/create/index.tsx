@@ -1,14 +1,13 @@
 import {
     Button,
     Label,
-    Form,
     Input,
     H2,
-    YStack,
-    TextArea
+    YStack
 } from '@my/ui';
-import { useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
+import SelectForm from '../../../components/select';
 
 interface FormData {
     name: string;
@@ -44,19 +43,7 @@ function AddPlayer() {
     const [number, setNumber] = useState(1);
     const [age, setAge] = useState(18);
     const [nationality, setNationality] = useState("");
-    const [state, setState] = useState("Ok !");
-
-    // const [form, setForm] = useState({
-    //     name: "",
-    //     post: "",
-    //     height: 200,
-    //     weight: 90,
-    //     number: 1,
-    //     age: 18,
-    //     nationality: "",
-    //     state: "Ok !"
-    // });
-
+    const [state, setState] = useState("Ok");
 
     const postData = async ({name, post, height, weight, number, age, nationality, state}: FormData) => {
         try {
@@ -81,19 +68,6 @@ function AddPlayer() {
         }
     };
 
-    // const handleChange = (
-    //     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    // ) => {
-    //     const target = e.target;
-    //     const value = target.value;
-    //     const name = target.name;
-
-    //     setForm({
-    //         ...form,
-    //         [name]: value,
-    //     });
-    // };
-
     const formValidate = () => {
         let err: Error = {};
         if (!name) err.name = "Entrer le nom du joueur";
@@ -111,8 +85,35 @@ function AddPlayer() {
         }
     };
 
+    const items = [
+        { name: 'Ok' },
+        { name: 'Blessé' },
+        { name: 'Repos' }
+    ]
+
+    const items2 = [
+        { name: 'BEL' },
+        { name: 'BRA' },
+        { name: 'CDN' },
+        { name: 'CHN' },
+        { name: 'DEU' },
+        { name: 'ESP' },
+        { name: 'FRA' },
+        { name: 'JAP' },
+        { name: 'KOR' },
+        { name: 'USA' }
+    ]
+
+    const items3 = [
+        { name: 'PG' },
+        { name: 'SG' },
+        { name: 'SF' },
+        { name: 'PF' },
+        { name: 'C' }
+    ]
+
     return (
-        <YStack f={1} jc="center" ai="center" gap="$8" p="$4" bg="$background">
+        <YStack marginTop="$8" ai="center" gap="$5">
             <H2>Ajouter un joueur à l'équipe</H2>
             
             <form onSubmit={handleSubmit}>
@@ -128,13 +129,7 @@ function AddPlayer() {
                 />
 
                 <Label htmlFor="post">Poste</Label>
-                <Input
-                    placeholder="Post du joueur"
-                    type="text"
-                    name="post"
-                    value={post}
-                    onChange={(e) => setPost(e.target.value)}
-                />
+                <SelectForm value={post} setValue={setPost} title={"Poste du joueur"} list={items3} />
 
                 <Label htmlFor="height">Taille</Label>
                 <Input
@@ -173,22 +168,10 @@ function AddPlayer() {
                 />
 
                 <Label htmlFor="nationality">Nationalité</Label>
-                <Input
-                    placeholder="Nationalité du joueur"
-                    type="text"
-                    name="nationality"
-                    value={nationality}
-                    onChange={(e) => setNationality(e.target.value)}
-                />
+                <SelectForm value={nationality} setValue={setNationality} title={"Nationalité du joueur"} list={items2} />
 
                 <Label htmlFor="state">Etat</Label>
-                <Input
-                    placeholder="Etat du joueur"
-                    type="text"
-                    name="state"
-                    value={state}
-                    onChange={(e) => setState(e.target.value)}
-                />
+                <SelectForm value={state} setValue={setState} title={"Etat du joueur"} list={items} />
 
                 <Button type="submit" className="btn" width="100%" marginTop="8px">
                     Ajouter
