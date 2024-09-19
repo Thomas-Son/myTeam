@@ -7,6 +7,7 @@ import {
     H3,
     YStack,
 } from '@my/ui';
+import { TextLink } from "solito/link";
 
 type Props = {
     player: Players;
@@ -31,11 +32,36 @@ function DeletePlayer({ player }: Props) {
     return (
         <YStack marginTop="$8" ai="center" gap="$5">
             <H3>Voulez-vous supprimer le joueur {player.name} ?</H3>
-            <Button borderRadius="$4" size="$3" backgroundColor="$grey5" onClick={handleDelete}>Supprimer</Button>
-            <Link href={".."}>
-                <Button borderRadius="$4" size="$3" backgroundColor="$grey5">Annuler</Button>
-            </Link>
-
+            <Button 
+                width="130px" 
+                height="45px" 
+                borderRadius="$4" 
+                size="$3" 
+                backgroundColor="$grey5" 
+                onClick={handleDelete}
+                borderWidth="$1"
+                animation="bouncy"
+                hoverStyle={{ scale: 0.925 }}
+                pressStyle={{ scale: 0.875 }}
+            >
+                Supprimer
+            </Button>
+            <TextLink href={".."}>
+                <Button 
+                    width="130px" 
+                    height="45px" 
+                    borderRadius="$4" 
+                    size="$3" 
+                    backgroundColor="$grey5"
+                    borderWidth="$1"
+                    animation="bouncy"
+                    hoverStyle={{ scale: 0.925 }}
+                    pressStyle={{ scale: 0.875 }}
+                >
+                    Annuler
+                </Button>
+            </TextLink>
+            
             <p>{message}</p>
         </YStack>
     );

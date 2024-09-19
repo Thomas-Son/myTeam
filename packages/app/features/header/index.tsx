@@ -9,8 +9,8 @@ function Header() {
             </TextLink>
 
             <XStack gap="$2">
-                <Button width="100px"><TextLink href="/connexion">Connexion</TextLink></Button>
-                <Button width="100px"><TextLink href="/inscription">Inscription</TextLink></Button>
+                <Button width="100px" backGroundColor="white"><TextLink href="/connexion">Connexion</TextLink></Button>
+                <Button width="100px" backGroundColor="white"><TextLink href="/inscription">Inscription</TextLink></Button>
             </XStack>
         </XStack>
     )
