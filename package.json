@@ -35,7 +35,7 @@
     "mongoose": "^8.6.3",
     "node-gyp": "^10.1.0",
     "prettier": "^3.2.5",
-    "turbo": "^1.4.2",
+    "turbo": "^2.1.2",
     "typescript": "^5.4.5",
     "yarn": "^1.22.22"
   },
