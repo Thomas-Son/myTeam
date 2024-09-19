@@ -21,6 +21,7 @@
     "react-native-web": "~0.19.12",
     "react-native-web-lite": "^1.110.2",
     "tamagui": "^1.110.2",
+    "turbo": "^1.13.3",
     "vercel": "latest"
   },
   "devDependencies": {
