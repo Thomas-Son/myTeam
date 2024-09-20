@@ -5,17 +5,14 @@ function Chart({title, stat, statMax}) {
     const sizeProp = `$${4}` as SizeTokens
 
     return (
-        <>
-            <YStack height={60} width="600px" alignItems="center" gap="$4" $xs={{ width: "320px" }} >
-                <Paragraph height={30} opacity={0.8}>
+        <YStack height={60} width="320px" alignItems="center" gap="$4" margin="auto" $gtXs={{ width: "660px" }} >
+            <Paragraph height={30} opacity={0.8}>
                     {title} : {stat} / {statMax}
-                </Paragraph>
-                <Progress size={sizeProp} value={ (stat/statMax) * 100 }>
-                    <Progress.Indicator animation="bouncy" backgroundColor="$blue7" />
-                </Progress>
-            </YStack>
-
-        </>
+            </Paragraph>
+            <Progress size={sizeProp} value={ (stat/statMax) * 100 }>
+                <Progress.Indicator animation="bouncy" backgroundColor="$blue7" />
+            </Progress>
+        </YStack>
     )
 }
 

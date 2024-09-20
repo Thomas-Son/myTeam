@@ -11,6 +11,7 @@ function TabsList2() {
             borderWidth="$1"
             overflow="hidden"
             borderColor="$blue5"
+            marginBottom="$4"
         >
             <Tabs.List
                 separator={<Separator vertical borderColor="$blue5" />}

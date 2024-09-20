@@ -1,4 +1,4 @@
-import { YStack, Separator, SizableText, Tabs, useMedia } from 'tamagui'
+import { YStack, Separator, SizableText, Tabs } from 'tamagui'
 import Chart from "./chart";
 
 function TabsList() {
@@ -11,6 +11,7 @@ function TabsList() {
                 borderWidth="$1"
                 overflow="hidden"
                 borderColor="$blue5"
+                marginBottom="$4"
             >
                 <Tabs.List
                     separator={<Separator vertical borderColor="$blue5" />}
@@ -32,14 +33,14 @@ function TabsList() {
                 </Tabs.List>
                 <Separator borderColor="$blue5" />
                 <Tabs.Content value="tab1">
-                    <YStack gap="$4" margin="$5">
+                    <YStack gap="$4" padding="$5">
                         <Chart title="Matchs joués" stat={10} statMax={10} />
-                        <Chart title="Moy. min par match" stat={39} statMax={60} />
+                        <Chart title="Moy. min par match" stat={39} statMax={48} />
                         <Chart title="Moy. points" stat={31} statMax={37} />
                     </YStack>
                 </Tabs.Content>
 
-                <Tabs.Content value="tab2" margin="$5">
+            <Tabs.Content value="tab2" padding="$5">
                     <YStack gap="$4">
                         <Chart title="Lancer franc" stat={46} statMax={57} />
                         <Chart title="Tirs 2 points" stat={34} statMax={52} />
@@ -47,7 +48,7 @@ function TabsList() {
                     </YStack>
                 </Tabs.Content>
 
-                <Tabs.Content value="tab3" margin="$5">
+            <Tabs.Content value="tab3" padding="$5">
                     <YStack gap="$4">
                         <Chart title="Offensif" stat={12} statMax={12} />
                         <Chart title="Deffensif" stat={6} statMax={8} />
@@ -55,7 +56,7 @@ function TabsList() {
                     </YStack>
                 </Tabs.Content>
 
-                <Tabs.Content value="tab4" margin="$5">
+            <Tabs.Content value="tab4" padding="$5">
                     <YStack gap="$4">
                         <Chart title="Passes D." stat={10} statMax={16} />
                         <Chart title="Fautes" stat={12} statMax={12} />

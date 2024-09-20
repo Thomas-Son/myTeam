@@ -2,14 +2,11 @@ import {
     Button,
     H2,
     H3,
-    H4,
     YStack,
     XStack,
-    Avatar,
     Section,
     Spinner
 } from '@my/ui';
-import { Card, Paragraph } from 'tamagui'
 import { useEffect, useState } from "react";
 import { TextLink } from "solito/link";
 import TabsList2 from "../../components/tabs2";
@@ -17,7 +14,7 @@ import CardPlayer from '../../components/cardPlayer';
 
 function Team() {
 
-    const [allPlayers, setAllPlayers] = useState();
+    const [allPlayers, setAllPlayers] = useState([]);
 
     useEffect(() => {
         async function getData() {
@@ -54,7 +51,7 @@ function Team() {
                     ) : (
                         allPlayers.map((player) => (
 
-                            <TextLink href={"/team-demo/" + player._id}>
+                        <TextLink href={"/team-demo/" + player._id}>
                             <CardPlayer data={player} />
                         </TextLink>
 
@@ -62,7 +59,7 @@ function Team() {
                 </XStack>
             </Section>
 
-            <Section gap="$4" p="$5" alignItems="center">
+            <Section gap="$4" alignItems="center">
                 <H3>Statistiques :</H3>
 
                 <TabsList2 />

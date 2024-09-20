@@ -91,12 +91,11 @@ const PlayerPage = ({ player }: Props) => {
                 </Card>
             </Section>
 
-            <Section gap="$4" p="$5" alignItems="center">
+            <Section gap="$4" alignItems="center">
                 <H2>Statistiques :</H2>
 
                 <TabsList />
             </ Section>
-            
         </YStack>
     );
 };
