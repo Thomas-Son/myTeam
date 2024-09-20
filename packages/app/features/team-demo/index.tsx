@@ -31,7 +31,7 @@ function Team() {
 
     return (
         <YStack marginTop="$8" ai="center" bg="$background">
-            <H2>Panneau de gestion de l'équipe démo.</H2>
+            {/* <H2>Panneau de gestion de l'équipe démo.</H2>
             <Section gap="$4" p="$5" alignItems="center">
                 <H3>Liste des joueurs :</H3>
 
@@ -65,7 +65,7 @@ function Team() {
                 <H3>Statistiques :</H3>
 
                 <TabsList2 />
-            </Section>
+            </Section> */}
         </YStack>
     );
 };
