@@ -37,10 +37,12 @@ function Team() {
 
                 <Button 
                     borderRadius="$4"
-                    borderWidth="$1"
+                    backgroundColor="$blue2"
+                    width="160px"
                     animation="bouncy"
-                    hoverStyle={{ scale: 0.925 }}
-                    pressStyle={{ scale: 0.875 }}
+                    borderColor="$blue8"
+                    hoverStyle={{ scale: 0.925, borderWidth: "$1", borderColor: "$blue4", backgroundColor: "$blue3" }}
+                    pressStyle={{ scale: 0.875, borderWidth: "$1.5", borderColor: "$blue5", backgroundColor: "$blue3" }}
                 >
                     <TextLink href="/ajouter-joueur">Ajouter un joueur</TextLink>
                 </Button>
@@ -51,7 +53,7 @@ function Team() {
                     ) : (
                         allPlayers.map((player) => (
 
-                        <TextLink href={"/team-demo/" + player._id}>
+                        <TextLink href={"/team-demo/"}>
                             <CardPlayer data={player} />
                         </TextLink>
 
