@@ -37,12 +37,12 @@ function Team() {
 
                 <Button 
                     borderRadius="$4"
-                    backgroundColor="$blue2"
-                    width="160px"
-                    animation="bouncy"
-                    borderColor="$blue8"
-                    hoverStyle={{ scale: 0.925, borderWidth: "$1", borderColor: "$blue4", backgroundColor: "$blue3" }}
-                    pressStyle={{ scale: 0.875, borderWidth: "$1.5", borderColor: "$blue5", backgroundColor: "$blue3" }}
+                    // backgroundColor="$blue2"
+                    // width="160px"
+                    // animation="bouncy"
+                    // borderColor="$blue8"
+                    // hoverStyle={{ scale: 0.925, borderWidth: "$1", borderColor: "$blue4", backgroundColor: "$blue3" }}
+                    // pressStyle={{ scale: 0.875, borderWidth: "$1.5", borderColor: "$blue5", backgroundColor: "$blue3" }}
                 >
                     <TextLink href="/ajouter-joueur">Ajouter un joueur</TextLink>
                 </Button>
