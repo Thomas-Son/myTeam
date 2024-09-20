@@ -8,6 +8,7 @@ import {
     YStack,
 } from '@my/ui';
 import { TextLink } from "solito/link";
+import Header from "app/features/header/index"
 
 type Props = {
     player: Players;
@@ -30,40 +31,44 @@ function DeletePlayer({ player }: Props) {
     };
 
     return (
-        <YStack marginTop="$8" ai="center" gap="$5">
-            <H3>Voulez-vous supprimer le joueur {player.name} ?</H3>
-            <Button 
-                width="130px" 
-                height="45px" 
-                borderRadius="$4" 
-                size="$3" 
-                backgroundColor="$grey5" 
-                onClick={handleDelete}
-                borderWidth="$1"
-                animation="bouncy"
-                hoverStyle={{ scale: 0.925 }}
-                pressStyle={{ scale: 0.875 }}
-            >
-                Supprimer
-            </Button>
-            <TextLink href={".."}>
+        <main>
+            <Header/>
+            <YStack marginTop="$8" ai="center" gap="$5">
+                <H3>Voulez-vous supprimer le joueur {player.name} ?</H3>
                 <Button 
                     width="130px" 
                     height="45px" 
                     borderRadius="$4" 
                     size="$3" 
-                    backgroundColor="$grey5"
+                    backgroundColor="$grey5" 
+                    onClick={handleDelete}
                     borderWidth="$1"
                     animation="bouncy"
                     hoverStyle={{ scale: 0.925 }}
                     pressStyle={{ scale: 0.875 }}
                 >
-                    Annuler
+                    Supprimer
                 </Button>
-            </TextLink>
-            
-            <p>{message}</p>
-        </YStack>
+                <TextLink href={".."}>
+                    <Button 
+                        width="130px" 
+                        height="45px" 
+                        borderRadius="$4" 
+                        size="$3" 
+                        backgroundColor="$grey5"
+                        borderWidth="$1"
+                        animation="bouncy"
+                        hoverStyle={{ scale: 0.925 }}
+                        pressStyle={{ scale: 0.875 }}
+                    >
+                        Annuler
+                    </Button>
+                </TextLink>
+                
+                <p>{message}</p>
+            </YStack>
+        </main>
+        
     );
 };
 

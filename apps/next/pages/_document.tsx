@@ -50,7 +50,6 @@ export default class Document extends NextDocument {
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         </Head>
         <body>
-          <Header />
           <Main />
           <NextScript />
         </body>

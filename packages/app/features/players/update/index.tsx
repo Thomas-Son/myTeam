@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import useSWR, { mutate } from "swr";
 import SelectForm from '../../../components/select';
+import Header from "app/features/header/index"
 
 interface FormData {
     name: string;
@@ -24,11 +25,6 @@ interface FormData {
 interface Error {
     name?: string;
 }
-
-type Props = {
-    formId: string;
-    playerForm: FormData;
-};
 
 function UpdatePlayer() {
 
@@ -134,71 +130,75 @@ function UpdatePlayer() {
     ]
 
     return (
-        <YStack marginTop="$8" ai="center" gap="$5">
-            <H2>Modifier un joueur</H2>
-            <form onSubmit={handleSubmit}>
-                <Label>Nom</Label>
-                <Input
-                    size="$4" borderWidth={2}
-                    placeholder="Nom du joueur"
-                    type="text"
-                    name="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                />
+        <main>
+            <Header />
+            <YStack marginTop="$8" ai="center" gap="$5">
+                <H2>Modifier un joueur</H2>
+                <form onSubmit={handleSubmit}>
+                    <Label>Nom</Label>
+                    <Input
+                        size="$4" borderWidth={2}
+                        placeholder="Nom du joueur"
+                        type="text"
+                        name="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                    />
 
-                <Label htmlFor="post">Poste</Label>
-                <SelectForm value={post} setValue={setPost} title={"Poste du joueur"} list={items3} />
+                    <Label htmlFor="post">Poste</Label>
+                    <SelectForm value={post} setValue={setPost} title={"Poste du joueur"} list={items3} />
 
-                <Label htmlFor="height">Taille</Label>
-                <Input
-                    placeholder="Taille du joueur"
-                    type="number"
-                    name="height"
-                    value={height}
-                    onChange={(e) => setHeight(e.target.value)}
-                />
+                    <Label htmlFor="height">Taille</Label>
+                    <Input
+                        placeholder="Taille du joueur"
+                        type="number"
+                        name="height"
+                        value={height}
+                        onChange={(e) => setHeight(e.target.value)}
+                    />
 
-                <Label htmlFor="weight">Poids</Label>
-                <Input
-                    placeholder="Poids du joueur"
-                    type="number"
-                    name="weight"
-                    value={weight}
-                    onChange={(e) => setWeight(e.target.value)}
-                />
+                    <Label htmlFor="weight">Poids</Label>
+                    <Input
+                        placeholder="Poids du joueur"
+                        type="number"
+                        name="weight"
+                        value={weight}
+                        onChange={(e) => setWeight(e.target.value)}
+                    />
 
-                <Label htmlFor="number">Numéro</Label>
-                <Input
-                    placeholder="Numéro du joueur"
-                    type="number"
-                    name="number"
-                    value={number}
-                    onChange={(e) => setNumber(e.target.value)}
-                />
+                    <Label htmlFor="number">Numéro</Label>
+                    <Input
+                        placeholder="Numéro du joueur"
+                        type="number"
+                        name="number"
+                        value={number}
+                        onChange={(e) => setNumber(e.target.value)}
+                    />
 
-                <Label htmlFor="age">Age</Label>
-                <Input
-                    placeholder="Age du joueur"
-                    type="number"
-                    name="age"
-                    value={age}
-                    onChange={(e) => setAge(e.target.value)}
-                />
+                    <Label htmlFor="age">Age</Label>
+                    <Input
+                        placeholder="Age du joueur"
+                        type="number"
+                        name="age"
+                        value={age}
+                        onChange={(e) => setAge(e.target.value)}
+                    />
 
-                <Label htmlFor="nationality">Nationalité</Label>
-                <SelectForm value={nationality} setValue={setNationality} title={"Nationalité du joueur"} list={items2} />
+                    <Label htmlFor="nationality">Nationalité</Label>
+                    <SelectForm value={nationality} setValue={setNationality} title={"Nationalité du joueur"} list={items2} />
 
-                <Label htmlFor="state">Etat</Label>
-                <SelectForm value={state} setValue={setState} title={"Etat du joueur"} list={items} />
+                    <Label htmlFor="state">Etat</Label>
+                    <SelectForm value={state} setValue={setState} title={"Etat du joueur"} list={items} />
 
-                <Button type="submit" className="btn" width="100%" marginTop="8px">
-                    Ajouter
-                </Button>
-            </form>
+                    <Button type="submit" className="btn" width="100%" marginTop="8px">
+                        Ajouter
+                    </Button>
+                </form>
 
-        </YStack>
+            </YStack>
+        </main>
+        
     );
 };
 
