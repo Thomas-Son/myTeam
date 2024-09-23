@@ -55,7 +55,7 @@ function Header() {
                         hoverStyle={{ backgroundColor: "white", borderColor: "" }}
                         pressStyle={{ backgroundColor: "$blue2", borderColor: "" }}
                     >
-                        <TextLink href="/connexion">Connexion</TextLink>
+                        <TextLink href="/utilisateur/connexion">Connexion</TextLink>
                     </Button>
                     <Button 
                         backgroundColor="$blue1" 
@@ -66,7 +66,7 @@ function Header() {
                         hoverStyle={{ backgroundColor: "white", borderColor: "" }}
                         pressStyle={{ backgroundColor: "$blue2", borderColor: "" }}
                     >
-                        <TextLink href="/inscription">Inscription</TextLink>
+                        <TextLink href="/utilisateur/inscription">Inscription</TextLink>
                     </Button>
                     <Button 
                         backgroundColor="$blue1"
