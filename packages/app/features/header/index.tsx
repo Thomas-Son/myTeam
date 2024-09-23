@@ -19,13 +19,13 @@ function Header() {
                         width="100px" 
                         backgroundColor="white"
                     >
-                        <TextLink href="/connexion">Connexion</TextLink>
+                        <TextLink href="/utilisateur/connexion">Connexion</TextLink>
                     </Button>
                     <Button 
                         width="100px" 
                         backgroundColor="white"
                     >
-                        <TextLink href="/inscription">Inscription</TextLink>
+                        <TextLink href="/utilisateur/inscription">Inscription</TextLink>
                     </Button>
                 </XStack>
 

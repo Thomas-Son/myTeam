@@ -3,10 +3,12 @@ import {
     Label,
     H2,
     YStack,
+    Input
 } from '@my/ui';
 import { Form } from 'tamagui';
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Header from "app/features/header/index"
 
 interface FormData {
     alias: string;
@@ -40,9 +42,12 @@ function Signup({ formId, userForm }: Props) {
         email: userForm.email,
         pwd: userForm.pwd
     });
+    const [alias, setAlias] = useState("");
+    const [team, setTeam] = useState("");
+    const [email, setEmail] = useState("");
+    const [pwd, setPwd] = useState("");
 
-
-    const postData = async (form: FormData) => {
+    const postData = async ({alias, team, email, pwd}: FormData) => {
         try {
             const res = await fetch("/api/users", {
                 method: "POST",
@@ -50,7 +55,7 @@ function Signup({ formId, userForm }: Props) {
                     Accept: contentType,
                     "Content-Type": contentType,
                 },
-                body: JSON.stringify(form),
+                body: JSON.stringify({ alias, team, email, pwd }),
             });
             console.log(res)
 
@@ -91,61 +96,64 @@ function Signup({ formId, userForm }: Props) {
         const errs = formValidate();
 
         if (Object.keys(errs).length === 0) {
-            postData(form)
+            postData({ alias, team, email, pwd })
         } else {
             setErrors({ errs });
         }
     };
 
     return (
-        <YStack f={1} jc="center" ai="center" gap="$8" p="$4" bg="$background">
-            <H2>Inscription</H2>
-            <form onSubmit={handleSubmit} >
-                <Label htmlFor="alias">Nom d'utilisateur</Label>
-                <input
-                    placeholder="Nom d'utilisateur"
-                    type="text"
-                    name="alias"
-                    value={form.alias}
-                    onChange={handleChange}
-                    required
-                />
+        <main>
+            <Header />
+            <YStack f={1} jc="center" ai="center" gap="$8" p="$4" bg="$background" marginTop="$8">
+                <H2>Inscription</H2>
+                <form onSubmit={handleSubmit} >
+                    <Label htmlFor="alias">Nom d'utilisateur</Label>
+                    <Input
+                        placeholder="Nom d'utilisateur"
+                        type="text"
+                        name="alias"
+                        value={alias}
+                        onChange={(e) => setAlias(e.target.value)}
+                        required
+                    />
 
-                <Label htmlFor="team">Nom de l'équipe</Label>
-                <input
-                    placeholder="Nom de l'équipe"
-                    type="text"
-                    name="team"
-                    value={form.team}
-                    onChange={handleChange}
-                    required
-                />
+                    <Label htmlFor="team">Nom de l'équipe</Label>
+                    <Input
+                        placeholder="Nom de l'équipe"
+                        type="text"
+                        name="team"
+                        value={team}
+                        onChange={(e) => setTeam(e.target.value)}
+                        required
+                    />
 
-                <Label htmlFor="email">Email</Label>
-                <input
-                    placeholder="Email"
-                    type="email"
-                    name="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    required
-                />
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                        placeholder="Email"
+                        type="email"
+                        name="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
 
-                <Label htmlFor="pwd">Mot de passe</Label>
-                <input
-                    placeholder="Mot de passe"
-                    type="password"
-                    name="pwd"
-                    value={form.pwd}
-                    onChange={handleChange}
-                    required
-                />
+                    <Label htmlFor="pwd">Mot de passe</Label>
+                    <Input
+                        placeholder="Mot de passe"
+                        type="password"
+                        name="pwd"
+                        value={pwd}
+                        onChange={(e) => setPwd(e.target.value)}
+                        required
+                    />
 
-                <Button type="submit" className="btn">
-                    S'inscrire
-                </Button>
-            </form>
-        </YStack>
+                    <Button type="submit" margin="auto" marginTop="$3.5">
+                        S'inscrire
+                    </Button>
+                </form>
+            </YStack>
+        </main>
     );
 };
 

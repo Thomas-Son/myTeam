@@ -35,7 +35,7 @@ export function HomeScreen() {
             hoverStyle={{ scale: 0.925, borderWidth: "$1", borderColor: "$blue7", backgroundColor: "$blue6" }}
             pressStyle={{ scale: 0.875, borderWidth: "$1.5", borderColor: "$blue8", backgroundColor: "$blue6" }}
           >
-            <TextLink href="/connexion">Connexion</TextLink>
+            <TextLink href="/utilisateur/connexion">Connexion</TextLink>
           </Button>
           <Button
             borderRadius="$4"
@@ -45,7 +45,7 @@ export function HomeScreen() {
             borderColor="$blue8"
             hoverStyle={{ scale: 0.925, borderWidth: "$1", borderColor: "$blue7", backgroundColor: "$blue6" }}
             pressStyle={{ scale: 0.875, borderWidth: "$1.5", borderColor: "$blue8", backgroundColor: "$blue6" }}>
-            <TextLink href="/inscription">Inscription</TextLink>
+            <TextLink href="/utilisateur/inscription">Inscription</TextLink>
           </Button>
           <Button
             borderRadius="$4"
